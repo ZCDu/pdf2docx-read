@@ -86,6 +86,7 @@ class Blocks(ElementCollection):
             Blocks: self
         '''
         self.reset()  # clean current instances
+        # HACK: 也就是说
         for raw_block in raws:
             block_type = raw_block.get('type', -1) # type: int
             

@@ -57,6 +57,7 @@ class Converter:
             self._fitz_doc = fitz.Document(stream=stream)
 
         else:
+            # NOTE: 直接使用pymupdf进行了PDF文件的读取
             self._fitz_doc = fitz.Document(pdf_file)
 
         # initialize empty pages container
@@ -113,7 +114,6 @@ class Converter:
     # -----------------------------------------------------------------------
     # Parsing process: load -> analyze document -> parse pages -> make docx
     # -----------------------------------------------------------------------
-
     def parse(self, start:int=0, end:int=None, pages:list=None, **kwargs):
         '''Parse pages in three steps:
         * open PDF file with ``PyMuPDF``
@@ -334,6 +334,7 @@ class Converter:
         .. note::
             Multi-processing works only for continuous pages specified by ``start`` and ``end`` only.
         """
+        # NOTE: t0用于统计计算时间用的
         t0 = perf_counter()
         logging.info('Start to convert %s', self.filename_pdf)
         settings = self.default_settings
@@ -348,6 +349,7 @@ class Converter:
         if settings['multi_processing']:
             self._convert_with_multi_processing(docx_filename, start, end, **settings)
         else:
+            # NOTE: 按parse的说法，这里的make_docx才是构建docx的位置
             self.parse(start, end, pages, **settings).make_docx(docx_filename, **settings)
 
         logging.info('Terminated in %.2fs.', perf_counter()-t0)        

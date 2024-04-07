@@ -64,6 +64,7 @@ class RawPage(BasePage, ABC):
     @debug_plot('Source Text Blocks')
     def restore(self, **settings):
         '''Initialize layout extracted with ``PyMuPDF``.'''
+        # NOTE: 回到RawPageFitz执行
         raw_dict = self.extract_raw_dict(**settings)
         self.blocks.restore(raw_dict.get('blocks', []))
         self.shapes.restore(raw_dict.get('shapes', []))
@@ -185,7 +186,7 @@ class RawPage(BasePage, ABC):
             cols = row.group_by_columns()
             current_num_col = len(cols)
 
-            # column check:
+            # NOTE: column check:
             # consider 2-cols only
             if current_num_col>2:
                 current_num_col = 1

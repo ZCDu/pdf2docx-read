@@ -34,6 +34,7 @@ class Pages(BaseCollection):
 
             # init and extract data from PDF
             raw_page = RawPageFactory.create(page_engine=fitz_doc[page.id], backend='PyMuPDF')
+            # NOTE: 这里调用PYMUPDF进行了处理
             raw_page.restore(**settings)
 
             # check if any words are extracted since scanned pdf may be directed
@@ -70,7 +71,7 @@ class Pages(BaseCollection):
 
 
         # ---------------------------------------------
-        # 3. parse structure in page level, e.g. page margin, section
+        # NOTE: 3. parse structure in page level, e.g. page margin, section
         # ---------------------------------------------
         # parse sections
         for page, raw_page in zip(pages, raw_pages):
@@ -82,7 +83,7 @@ class Pages(BaseCollection):
             sections = raw_page.parse_section(**settings)
             page.sections.extend(sections)
     
-
+    # NOTE: 当前的处理过于简单，直接丢弃了页面的头和尾标
     @staticmethod
     def _parse_document(raw_pages:list):
         '''Parse structure in document/pages level, e.g. header, footer'''

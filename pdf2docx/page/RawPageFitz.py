@@ -16,7 +16,7 @@ from ..common.algorithm import get_area
 
 class RawPageFitz(RawPage):
     '''A wrapper of ``fitz.Page`` to extract source contents.'''
-
+    # NOTE: 在这儿进行各类原始的提取
     def extract_raw_dict(self, **settings):
         raw_dict = {}
         if not self.page_engine: return raw_dict
