@@ -74,6 +74,7 @@ class Converter:
     def close(self): self._fitz_doc.close()
 
 
+    # NOTE: 参数配置，这里主要注意ocr，默认为0不使用ocr
     @property
     def default_settings(self):
         '''Default parsing parameters.'''

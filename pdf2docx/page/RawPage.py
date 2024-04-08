@@ -64,7 +64,7 @@ class RawPage(BasePage, ABC):
     @debug_plot('Source Text Blocks')
     def restore(self, **settings):
         '''Initialize layout extracted with ``PyMuPDF``.'''
-        # NOTE: 回到RawPageFitz执行
+        # NOTE: 回到RawPageFitz执行, 获取PDF元素
         raw_dict = self.extract_raw_dict(**settings)
         self.blocks.restore(raw_dict.get('blocks', []))
         self.shapes.restore(raw_dict.get('shapes', []))

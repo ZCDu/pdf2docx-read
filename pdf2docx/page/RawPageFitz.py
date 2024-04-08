@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 '''
 A wrapper of PyMuPDF Page as page engine.
 '''
@@ -55,6 +53,7 @@ class RawPageFitz(RawPage):
             https://pymupdf.readthedocs.io/en/latest/functions.html#Page.get_texttrace
             https://pymupdf.readthedocs.io/en/latest/textpage.html
         '''
+        # NOTE: ocr=0,默认不进行OCR
         ocr = settings['ocr']
         if ocr==1: raise SystemExit("OCR feature is planned but not implemented yet.")
 
